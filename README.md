@@ -6,22 +6,22 @@ This repository includes my notes and experiments with the tensorflow 2.x API.
 
 
 * Basic:
-    * [Operations.ipynb]   
-    * [Tensors.ipynb]  
-    * [tf.Variable vs tf.Tensor.ipynb]
+    * [Operations.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Basic/Operations.ipynb)
+    * [Tensors.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Basic/Tensors.ipynb)
+    * [tf.Variable vs tf.Tensor.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Basic/tf.Variable%20vs%20tf.Tensor.ipynb)
 
 * AutoDiff:
-    * [AutoDiff and Gradient Tape.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/AutoDiff/AutoDiff and Gradient Tape.ipynb)
+    * [AutoDiff and Gradient Tape.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/AutoDiff/AutoDiff%20and%20Gradient%20Tape.ipynb)
     * [AutoDiff - Train a feed forward NN.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/AutoDiff/AutoDiff%20-%20Train%20a%20feed%20forward%20NN.ipynb)
 
 * Graphs:
     * [Graph Execution in Tensorflow.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Graphs/Graph%20Execution%20with%20tf.function.ipynb)
-    * [Vizualize Graphs.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Graphs/Vizualize Graphs.ipynb)
+    * [Vizualize Graphs.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/Graphs/Vizualize%20Graphs.ipynb)
 
 'From Tensorflow to Keras':
-    * [Building own Layers.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From Tensorflow to Keras/Building own Layers.ipynb)
-    * [tf.Module and introducing keras.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From Tensorflow to Keras/tf.Module and introducing keras.ipynb)
-    * [More on Keras Model.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From%20Tensorflow%20to%20Keras/More on Keras Model.ipynb)
+    * [Building own Layers.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From%20Tensorflow%20to%20Keras/Building%20own%20Layers.ipynb)
+    * [tf.Module and introducing keras.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From%20Tensorflow%20to%20Keras/tf.Module%20and%20introducing%20keras.ipynb)
+    * [More on Keras Model.ipynb](https://github.com/mandalbiswadip/Tensorflow_two_notes/blob/master/From%20Tensorflow%20to%20Keras/More%20on%20Keras%20Model.ipynb)
 
 **Upcoming:**
 
