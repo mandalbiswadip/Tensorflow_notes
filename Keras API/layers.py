@@ -93,15 +93,53 @@ class RNNLayer(tf.keras.layers.Layer):
         states = tf.transpose(states, perm=[1, 0, 2])
         return outputs, states
 
+# Note: keras does offer the implementation of additive and dot product attention
 
-class AttentionLayer(tf.keras.layers.Layer):
-    pass
 
-    def __init__(self):
+class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
+    """Additive self attention
+
+    input -- > (batch size, query, dim)
+    output --> (batch size, query, dim)
+
+    This is the same as tf.keras.layers.AdditiveAttention with use_scale=False. You can verify below
+
+
+    >> inputs = tf.random.uniform((10,3,4))
+    >> at = tf.keras.layers.AdditiveAttention(use_scale=False)
+    >> att = AdditiveSelfAttentionLayer()
+    >> tf.equal(at([inputs, inputs]), att(inputs))
+    <tf.Tensor: shape=(10, 3, 4), dtype=bool, numpy=
+    array([[[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+
+       [[ True,  True,  True,  True],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]],
+        .
+        .
+        .
+        .
+                                    ]]
+    """
+    def __int__(self):
+        pass
+
+    def build(self, input_shape):
         pass
 
     def call(self, inputs, **kwargs):
-        raise NotImplementedError("implement this first")
+        # inputs - (batch size, seq, dim)
+        addition = tf.expand_dims(inputs, axis=-2) + tf.expand_dims(inputs, axis=-3)    # (batch size, seq, seq, dim)
+        e_values = tf.reduce_sum(tf.math.tanh(addition), axis=-1)                       # (batch size, seq, seq)
+        weights = tf.math.softmax(e_values, axis=-1)                                    # (batch size, seq, seq)
+        out = tf.matmul(weights, inputs)                                                # (batch size, seq, dim)
+        return out
 
 
 class SelfAttentionLayer(tf.keras.layers.Layer):
