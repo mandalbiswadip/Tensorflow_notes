@@ -103,6 +103,8 @@ class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
     output --> (batch size, query, dim)
 
     This is the same as tf.keras.layers.AdditiveAttention with use_scale=False. You can verify below
+    Note this is self attention and hence query and key are both
+    the same(you pass query and key separately in keras attention layers)
 
 
     >> inputs = tf.random.uniform((10,3,4))
@@ -142,12 +144,29 @@ class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
         return out
 
 
-class SelfAttentionLayer(tf.keras.layers.Layer):
-    def __init__(self):
+class BahdanauSelfAttentionLayer(tf.keras.layers.Layer):
+    """Additive self attention
+
+    input -- > (batch size, query, dim)
+    output --> (batch size, query, dim)
+
+    This is same as tf.keras.layers.Attention with use_scale=False.
+    Note this is self attention and hence query and key are both
+    the same(you pass query and key separately in keras attention layers)
+
+    """
+    def __int__(self):
+        pass
+
+    def build(self, input_shape):
         pass
 
     def call(self, inputs, **kwargs):
-        raise NotImplementedError("implement this first")
+        # inputs - (batch size, seq, dim)
+        e_values = tf.matmul(inputs, inputs, transpose_b=True)              # (batch size, seq, dim)
+        weights = tf.math.softmax(e_values, axis=-1)                                    # (batch size, seq, seq)
+        out = tf.matmul(weights, inputs)                                                # (batch size, seq, dim)
+        return out
 
 
 class HANLayer(tf.keras.layers.Layer):
