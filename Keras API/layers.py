@@ -87,13 +87,59 @@ class RNNLayer(tf.keras.layers.Layer):
             yt, current_state = self.rnn_cell(inputs=time_first_input[i], states=current_state)
             states.append(current_state)
             outputs.append(yt)
-        outputs = tf.stack(outputs)                  # stack array
+        outputs = tf.stack(outputs)  # stack array
         states = tf.stack(states)
         outputs = tf.transpose(outputs, perm=[1, 0, 2])
         states = tf.transpose(states, perm=[1, 0, 2])
         return outputs, states
 
+
 # Note: keras does offer the implementation of additive and dot product attention
+
+
+class AttentionLayer(tf.keras.layers.Layer):
+    """
+    Args:
+        use_scale: bool. if true then scale the scale the attention weights. not used currently
+        attention_type: The attention type. Options {"additive", "dot_product"}
+                        default is "additive"
+    """
+
+    def __init__(self, use_scale=False, attention_type="additive"):
+        super(AttentionLayer, self).__init__()
+        self.use_scale = use_scale
+        self.attention_type = attention_type
+
+    @staticmethod
+    def additive_attention_score(query, key):
+        addition = tf.expand_dims(query, axis=-2) + tf.expand_dims(key, axis=-3)  # (batch size, seq, seq, dim)
+        e_values = tf.reduce_sum(tf.math.tanh(addition), axis=-1)                 # (batch size, seq, seq)
+        weights = tf.math.softmax(e_values, axis=-1)                              # (batch size, seq, seq)
+        return weights
+
+    @staticmethod
+    def dot_product_attention_score(query, key):
+        e_values = tf.matmul(query, key, transpose_b=True)                         # (batch size, seq, dim)
+        weights = tf.math.softmax(e_values, axis=-1)                               # (batch size, seq, seq)
+        return weights
+
+    @property
+    def attention_function(self):
+        func_map = {"additive": self.additive_attention_score,
+                    "dot_product": self.dot_product_attention_score}
+        return func_map[self.attention_type]
+
+    def call(self, inputs, **kwargs):
+        if len(inputs) < 2:
+            raise ValueError("Expected 2 or 3 inputs "
+                             "as [query, value] or [query, value, key]")
+        q = inputs[0]
+        v = inputs[1]
+        k = inputs[2] if len(inputs) > 2 else v
+
+        weights = self.attention_function(query=q, key=k)
+        out = tf.matmul(weights, v)                    # (batch size, seq, dim)
+        return out
 
 
 class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
@@ -129,18 +175,16 @@ class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
         .
                                     ]]
     """
-    def __int__(self):
-        pass
 
-    def build(self, input_shape):
-        pass
+    def __int__(self):
+        super(AdditiveSelfAttentionLayer, self).__int__()
 
     def call(self, inputs, **kwargs):
         # inputs - (batch size, seq, dim)
-        addition = tf.expand_dims(inputs, axis=-2) + tf.expand_dims(inputs, axis=-3)    # (batch size, seq, seq, dim)
-        e_values = tf.reduce_sum(tf.math.tanh(addition), axis=-1)                       # (batch size, seq, seq)
-        weights = tf.math.softmax(e_values, axis=-1)                                    # (batch size, seq, seq)
-        out = tf.matmul(weights, inputs)                                                # (batch size, seq, dim)
+        addition = tf.expand_dims(inputs, axis=-2) + tf.expand_dims(inputs, axis=-3)  # (batch size, seq, seq, dim)
+        e_values = tf.reduce_sum(tf.math.tanh(addition), axis=-1)  # (batch size, seq, seq)
+        weights = tf.math.softmax(e_values, axis=-1)  # (batch size, seq, seq)
+        out = tf.matmul(weights, inputs)  # (batch size, seq, dim)
         return out
 
 
@@ -155,17 +199,15 @@ class BahdanauSelfAttentionLayer(tf.keras.layers.Layer):
     the same(you pass query and key separately in keras attention layers)
 
     """
-    def __int__(self):
-        pass
 
-    def build(self, input_shape):
-        pass
+    def __int__(self):
+        super(BahdanauSelfAttentionLayer, self).__int__()
 
     def call(self, inputs, **kwargs):
         # inputs - (batch size, seq, dim)
-        e_values = tf.matmul(inputs, inputs, transpose_b=True)              # (batch size, seq, dim)
-        weights = tf.math.softmax(e_values, axis=-1)                                    # (batch size, seq, seq)
-        out = tf.matmul(weights, inputs)                                                # (batch size, seq, dim)
+        e_values = tf.matmul(inputs, inputs, transpose_b=True)  # (batch size, seq, dim)
+        weights = tf.math.softmax(e_values, axis=-1)  # (batch size, seq, seq)
+        out = tf.matmul(weights, inputs)  # (batch size, seq, dim)
         return out
 
 
