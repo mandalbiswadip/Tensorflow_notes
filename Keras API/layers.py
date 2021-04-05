@@ -129,6 +129,9 @@ class AttentionLayer(tf.keras.layers.Layer):
                     "dot_product": self.dot_product_attention_score}
         return func_map[self.attention_type]
 
+    def compute_mask(self, inputs, mask=None):
+        pass
+
     def call(self, inputs, **kwargs):
         if len(inputs) < 2:
             raise ValueError("Expected 2 or 3 inputs "
@@ -178,6 +181,9 @@ class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
 
     def __int__(self):
         super(AdditiveSelfAttentionLayer, self).__int__()
+
+    def compute_mask(self, inputs, mask=None):
+        pass
 
     def call(self, inputs, **kwargs):
         # inputs - (batch size, seq, dim)
@@ -252,12 +258,14 @@ class EmbeddingLayer(tf.keras.layers.Layer):
                 self._verify_weight_dimension(weights)
                 self.embedding_weights = tf.constant(weights, dtype=tf.float32)
 
+    def compute_mask(self, inputs, mask=None):
+        pass
+
     def _verify_weight_dimension(self, weights):
         pass
 
     def call(self, inputs):
         # inputs - convert last axis numbers to embeddings
-
         return tf.nn.embedding_lookup(params=self.embedding_weights, ids=inputs)
 
 
@@ -275,3 +283,20 @@ class Transformer(tf.keras.layers.Layer):
 
     def call(self, inputs, **kwargs):
         raise NotImplementedError("implement this first")
+
+
+class LayerNormalization(tf.keras.layers.Layer):
+    pass
+
+
+class BatchNormalization(tf.keras.layers.Layer):
+    pass
+
+
+class ResNet(tf.keras.layers.Layer):
+    pass
+
+
+class VGG(tf.keras.layers.Layer):
+    pass
+
