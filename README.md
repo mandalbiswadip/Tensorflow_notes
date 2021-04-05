@@ -3,7 +3,6 @@
 This repository includes my notes and experiments with the tensorflow 2.x API.
 
 ## Table of contents
-https://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Operations.ipynb
 
 * Basic:
     * [Operations.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Operations.ipynb)
