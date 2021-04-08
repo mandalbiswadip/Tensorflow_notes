@@ -3,7 +3,6 @@
 This repository includes my notes and experiments with the tensorflow 2.x API.
 
 ## Table of contents
-https://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Operations.ipynb
 
 * Basic:
     * [Operations.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Operations.ipynb)
@@ -26,7 +25,7 @@ https://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/
     * [Writing Keras Models.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/Writing%20Keras%20Models.ipynb)
     * [Keras Eager or Graph execution.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/Keras%20Eager%20or%20Graph%20execution.ipynb)
     * [Masking and Padding.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/Masking%20and%20Padding.ipynb)
-    * [layers.py](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/layers.py)
+    * [layers.py](https://github.com/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/layers.py)
     * [Preprocessing APIs](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/preprocessing%20APIs.ipynb)
 
 **Upcoming:**

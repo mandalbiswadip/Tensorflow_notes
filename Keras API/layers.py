@@ -6,6 +6,8 @@ from __future__ import unicode_literals
 import tensorflow as tf
 
 
+tf.data.Dataset.prefetch()
+
 class Dense(tf.keras.layers.Layer):
     def __init__(self, out_features, name=None):
         super().__init__(name=name)
