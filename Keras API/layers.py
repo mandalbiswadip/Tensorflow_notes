@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import tensorflow as tf
 
 
-tf.data.Dataset.prefetch()
+tf.keras.Model.save_weights()
+tf.keras.layers.Attention
 
 class Dense(tf.keras.layers.Layer):
     def __init__(self, out_features, name=None):
@@ -148,7 +149,7 @@ class AttentionLayer(tf.keras.layers.Layer):
 
 
 class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
-    """Additive self attention
+    """Additive self attention or Bahdanau Self Attention
 
     input -- > (batch size, query, dim)
     output --> (batch size, query, dim)
@@ -196,8 +197,8 @@ class AdditiveSelfAttentionLayer(tf.keras.layers.Layer):
         return out
 
 
-class BahdanauSelfAttentionLayer(tf.keras.layers.Layer):
-    """Additive self attention
+class DotProductSelfAttentionLayer(tf.keras.layers.Layer):
+    """Dot product self attention
 
     input -- > (batch size, query, dim)
     output --> (batch size, query, dim)
@@ -209,7 +210,7 @@ class BahdanauSelfAttentionLayer(tf.keras.layers.Layer):
     """
 
     def __int__(self):
-        super(BahdanauSelfAttentionLayer, self).__int__()
+        super(DotProductSelfAttentionLayer, self).__int__()
 
     def call(self, inputs, **kwargs):
         # inputs - (batch size, seq, dim)
