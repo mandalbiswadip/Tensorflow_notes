@@ -4,6 +4,8 @@ This repository includes my notes and experiments with the tensorflow 2.x API.
 
 ## Table of contents
 
+* [layers.py](https://github.com/mandalbiswadip/Tensorflow_notes/blob/master/Keras%20API/layers.py) --> my implementation for important keras layers using tensorflow low level APIS.
+
 * Basic:
     * [Operations.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Operations.ipynb)
     * [Tensors.ipynb](http://nbviewer.jupyter.org/github/mandalbiswadip/Tensorflow_notes/blob/master/Basic/Tensors.ipynb)
